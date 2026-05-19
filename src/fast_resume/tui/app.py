@@ -1,4 +1,4 @@
-"""Main TUI application for fast-resume."""
+"""Main TUI application for omni-resume."""
 
 import logging
 import os
@@ -32,10 +32,10 @@ logger = logging.getLogger(__name__)
 
 
 class FastResumeApp(App):
-    """Main TUI application for fast-resume."""
+    """Main TUI application for omni-resume."""
 
     ENABLE_COMMAND_PALETTE = True
-    TITLE = "fast-resume"
+    TITLE = "omni-resume"
     SUB_TITLE = "Session manager"
 
     CSS = APP_CSS
@@ -98,7 +98,7 @@ class FastResumeApp(App):
         with Vertical():
             # Title bar: app name + version + session count
             with Horizontal(id="title-bar"):
-                yield Label(f"fast-resume v{__version__}", id="app-title")
+                yield Label(f"omni-resume v{__version__}", id="app-title")
                 yield Label("", id="session-count")
 
             # Search row with boxed input
@@ -308,7 +308,7 @@ class FastResumeApp(App):
         from .. import __version__
 
         try:
-            url = "https://pypi.org/pypi/fast-resume/json"
+            url = "https://pypi.org/pypi/omni-resume/json"
             with urllib.request.urlopen(url, timeout=3) as response:
                 data = json.load(response)
                 latest = data["info"]["version"]
@@ -317,7 +317,7 @@ class FastResumeApp(App):
                 self._available_update = latest
                 self.call_from_thread(
                     self.notify,
-                    f"{__version__} → {latest}\nRun [bold]uv tool upgrade fast-resume[/bold] to update",
+                    f"{__version__} → {latest}\nRun [bold]uv tool upgrade omni-resume[/bold] to update",
                     title="Update available",
                     timeout=5,
                 )

@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Build standalone binary for fast-resume using PyInstaller."""
+"""Build standalone binary for omni-resume using PyInstaller."""
 
 import platform
 import shutil
@@ -44,9 +44,9 @@ def get_version() -> str:
 def build() -> None:
     version = get_version()
     platform_tag = get_platform_tag()
-    archive_name = f"fast-resume-{version}-{platform_tag}"
+    archive_name = f"omni-resume-{version}-{platform_tag}"
 
-    print(f"Building fast-resume {version} for {platform_tag}")
+    print(f"Building omni-resume {version} for {platform_tag}")
 
     # Clean previous builds
     build_dir = ROOT / "build"
@@ -76,7 +76,7 @@ def build() -> None:
         "--clean",
         # Copy package metadata so importlib.metadata.version() works
         "--copy-metadata",
-        "fast-resume",
+        "omni-resume",
         # Rich dynamically imports unicode data modules by version string
         "--collect-submodules",
         "rich._unicode_data",
@@ -93,17 +93,17 @@ def build() -> None:
     if not dist_dir.exists():
         raise RuntimeError(f"Expected output directory {dist_dir} not found")
 
-    # Also create a 'fast-resume' symlink/copy inside the dir
+    # Also create an 'omni-resume' symlink/copy inside the dir
     fr_binary = dist_dir / "fr"
     if sys.platform == "win32":
         fr_binary_exe = dist_dir / "fr.exe"
         if fr_binary_exe.exists():
-            shutil.copy2(fr_binary_exe, dist_dir / "fast-resume.exe")
+            shutil.copy2(fr_binary_exe, dist_dir / "omni-resume.exe")
     else:
         if fr_binary.exists():
-            fast_resume_link = dist_dir / "fast-resume"
-            if not fast_resume_link.exists():
-                fast_resume_link.symlink_to("fr")
+            omni_resume_link = dist_dir / "omni-resume"
+            if not omni_resume_link.exists():
+                omni_resume_link.symlink_to("fr")
 
     # Create tar.gz archive
     archive_path = DIST / archive_name

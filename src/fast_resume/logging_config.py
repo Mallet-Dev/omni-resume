@@ -1,4 +1,4 @@
-"""Logging configuration for fast-resume."""
+"""Logging configuration for omni-resume."""
 
 import logging
 from pathlib import Path
@@ -12,7 +12,7 @@ parse_logger = logging.getLogger("fast_resume.parse_errors")
 def setup_logging() -> None:
     """Set up logging with file handler for parse errors.
 
-    Logs are written to ~/.cache/fast-resume/parse-errors.log
+    Logs are written to ~/.cache/omni-resume/parse-errors.log
     """
     # Ensure cache directory exists
     CACHE_DIR.mkdir(parents=True, exist_ok=True)

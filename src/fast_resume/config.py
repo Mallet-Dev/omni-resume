@@ -1,12 +1,14 @@
-"""Configuration and constants for fast-resume."""
+"""Configuration and constants for omni-resume."""
 
 from pathlib import Path
 
 # Agent colors and badges (badge is the display name shown in UI)
 AGENTS = {
+    "antigravity": {"color": "#4285F4", "badge": "antigravity"},
     "claude": {"color": "#E87B35", "badge": "claude"},
     "codex": {"color": "#00A67E", "badge": "codex"},
     "opencode": {"color": "#CFCECD", "badge": "opencode"},
+    "hermes": {"color": "#E11D48", "badge": "hermes"},
     "vibe": {"color": "#FF6B35", "badge": "vibe"},
     "crush": {"color": "#6B51FF", "badge": "crush"},
     "copilot-cli": {"color": "#9CA3AF", "badge": "copilot"},
@@ -14,8 +16,10 @@ AGENTS = {
 }
 
 # Storage paths
+ANTIGRAVITY_BRAIN_DIR = Path.home() / ".gemini" / "antigravity" / "brain"
 CLAUDE_DIR = Path.home() / ".claude" / "projects"
 CODEX_DIR = Path.home() / ".codex" / "sessions"
+HERMES_DIR = Path.home() / ".hermes" / "sessions"
 OPENCODE_DIR = Path.home() / ".local" / "share" / "opencode"
 OPENCODE_LEGACY_DIR = OPENCODE_DIR / "storage"
 OPENCODE_DB = OPENCODE_DIR / "opencode.db"
@@ -24,9 +28,9 @@ CRUSH_PROJECTS_FILE = Path.home() / ".local" / "share" / "crush" / "projects.jso
 COPILOT_DIR = Path.home() / ".copilot" / "session-state"
 
 # Storage location
-CACHE_DIR = Path.home() / ".cache" / "fast-resume"
+CACHE_DIR = Path.home() / ".cache" / "omni-resume"
 INDEX_DIR = CACHE_DIR / "tantivy_index"
 LOG_FILE = CACHE_DIR / "parse-errors.log"
 SCHEMA_VERSION = (
-    20  # Bump when schema changes (20: fast timestamp field for sorting by date)
+    21  # Bump when schema changes (21: Antigravity and Hermes agent support)
 )

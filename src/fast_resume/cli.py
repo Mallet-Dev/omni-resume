@@ -1,4 +1,4 @@
-"""CLI entry point for fast-resume."""
+"""CLI entry point for omni-resume."""
 
 import os
 
@@ -7,6 +7,7 @@ import humanize
 from rich.console import Console
 from rich.table import Table
 
+from . import __version__
 from .config import AGENTS, INDEX_DIR
 from .index import TantivyIndex
 from .logging_config import setup_logging
@@ -21,11 +22,13 @@ from .tui import run_tui
     "--agent",
     type=click.Choice(
         [
+            "antigravity",
             "claude",
             "codex",
             "copilot-cli",
             "copilot-vscode",
             "crush",
+            "hermes",
             "opencode",
             "vibe",
         ]
@@ -49,7 +52,7 @@ from .tui import run_tui
     is_flag=True,
     help="Disable checking for new versions",
 )
-@click.version_option()
+@click.version_option(version=__version__, prog_name="omni-resume")
 def main(
     query: str,
     agent: str | None,
@@ -63,8 +66,9 @@ def main(
 ) -> None:
     """Fast fuzzy finder for coding agent session history.
 
-    Search across Claude Code, Codex CLI, Copilot CLI, Crush, OpenCode, and Vibe sessions.
-    Select a session to resume it with the appropriate agent.
+    Search across Antigravity, Claude Code, Codex CLI, Copilot CLI, Crush,
+    Hermes, OpenCode, and Vibe sessions. Select a session to resume it with
+    the appropriate agent.
 
     Supports keyword search syntax:
 
@@ -79,6 +83,8 @@ def main(
         date:VALUE       Filter by date/time (today, <1h, >1d, etc.)
 
     Examples:
+
+        fr agent:antigravity,hermes api # Antigravity OR Hermes sessions
 
         fr agent:claude,codex api       # Claude OR Codex sessions
 

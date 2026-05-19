@@ -1,5 +1,11 @@
-"""fast-resume: Fuzzy finder for coding agent session history."""
+"""omni-resume: Fuzzy finder for coding agent session history."""
 
-from importlib.metadata import version
+from importlib.metadata import PackageNotFoundError, version
 
-__version__ = version("fast-resume")
+try:
+    __version__ = version("omni-resume")
+except PackageNotFoundError:
+    try:
+        __version__ = version("fast-resume")
+    except PackageNotFoundError:
+        __version__ = "0.0.0"

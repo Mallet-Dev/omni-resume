@@ -1,4 +1,4 @@
-"""PyInstaller entry point for fast-resume."""
+"""PyInstaller entry point for omni-resume."""
 
 from fast_resume.cli import main
 

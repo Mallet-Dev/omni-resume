@@ -5,12 +5,14 @@ from concurrent.futures import ThreadPoolExecutor, as_completed
 from typing import Callable
 
 from .adapters import (
+    AntigravityAdapter,
     ClaudeAdapter,
     CodexAdapter,
     CopilotAdapter,
     CopilotVSCodeAdapter,
     CrushAdapter,
     ErrorCallback,
+    HermesAdapter,
     OpenCodeAdapter,
     Session,
     VibeAdapter,
@@ -27,11 +29,13 @@ class SessionSearch:
 
     def __init__(self) -> None:
         self.adapters = [
+            AntigravityAdapter(),
             ClaudeAdapter(),
             CodexAdapter(),
             CopilotAdapter(),
             CopilotVSCodeAdapter(),
             CrushAdapter(),
+            HermesAdapter(),
             OpenCodeAdapter(),
             VibeAdapter(),
         ]

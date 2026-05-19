@@ -75,8 +75,8 @@ class TestAntigravityAdapter:
         assert "patched the workflow" in session.content
         assert session.timestamp == datetime.fromisoformat("2026-05-11T18:13:10+00:00")
 
-    def test_resume_command_falls_back_to_session_listing(self, adapter):
-        """Antigravity currently falls back to native session listing."""
+    def test_resume_command_uses_raw_uuid(self, adapter):
+        """Antigravity should resume by its native UUID."""
         session = Session(
             id="antigravity:abc123",
             agent="antigravity",
@@ -86,4 +86,4 @@ class TestAntigravityAdapter:
             content="",
         )
 
-        assert adapter.get_resume_command(session) == ["gemini", "--list-sessions"]
+        assert adapter.get_resume_command(session) == ["gemini", "--resume", "abc123"]

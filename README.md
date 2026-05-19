@@ -49,26 +49,14 @@ That gets worse once you spread work across multiple surfaces:
 | Copilot VS Code | Yes | Opens project context |
 | Vibe | Yes | Direct resume |
 | Crush | Yes | Project reopen fallback |
-| Antigravity | Yes | Native session-list fallback |
-
-### Antigravity note
-
-Antigravity's current CLI does not expose a stable public "resume by exact session id" contract the way Claude, Codex, and Hermes do. `omni-resume` still indexes Antigravity cleanly, but handoff currently falls back to:
-
-```bash
-gemini --list-sessions
-```
-
-run from the original project directory.
-
-That means Antigravity support is useful today for search and project recovery, but not yet a perfect one-click exact resume.
+| Antigravity | Yes | Direct resume by UUID |
 
 ## Added in this fork
 
 - Hermes adapter for `~/.hermes/sessions`
 - Antigravity adapter for `~/.gemini/antigravity/brain/*/.system_generated/logs/overview.txt`
 - Hermes direct resume support via `hermes --resume <session_id>`
-- Antigravity project-aware fallback using its native session picker flow
+- Antigravity direct resume support via `gemini --resume <uuid>`
 - Rebranded package, cache path, and CLI metadata for standalone public use
 
 ## Installation

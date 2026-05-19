@@ -242,6 +242,11 @@ class AntigravityAdapter(BaseSessionAdapter):
         """Prefix session IDs to avoid cross-agent collisions."""
         return f"{self.name}:{raw_id}"
 
+    def _raw_id(self, session_id: str) -> str:
+        """Strip the adapter prefix from a normalized session ID."""
+        prefix = f"{self.name}:"
+        return session_id[len(prefix) :] if session_id.startswith(prefix) else session_id
+
     def get_resume_command(self, session: Session, yolo: bool = False) -> list[str]:
-        """Fallback to Antigravity's native session listing for the project."""
-        return ["gemini", "--list-sessions"]
+        """Resume an Antigravity session by its native UUID."""
+        return ["gemini", "--resume", self._raw_id(session.id)]
